@@ -167,7 +167,14 @@ const Util = {
     if (name.match(/^.*?(([0-9]+|[０-９]+)(軒))/)) {
       const original = RegExp.$2
       const normalized = Util.h2j(Util.z2h(original))
-      name = name.replace(`${original}条`, `${normalized}条`)
+      name = name.replace(`${original}軒`, `${normalized}軒`)
+    }
+
+    // 数字「線」を感数字に（旭川市など）
+    if (name.match(/^.*?(([0-9]+|[０-９]+)(線))/)) {
+      const original = RegExp.$2
+      const normalized = Util.h2j(Util.z2h(original))
+      name = name.replace(`${original}線`, `${normalized}線`)
     }
 
     // 数字丁を漢数字に（堺市）
