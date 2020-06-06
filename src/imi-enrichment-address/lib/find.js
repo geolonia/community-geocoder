@@ -173,15 +173,13 @@ const find = address => {
       // `丁目` が `tree.json` にある場合バグるかも
       if (5 === answer[0].code.length && answer[0].code.startsWith('26') && normalized.substring(i)) {
         const result = { code: '', tail: '' }
-        let theIndex = 0
         for (let k = 0; k < answer[0].children.length; k++) {
           const item = answer[0].children[k]
           const index = normalized.substring(i).lastIndexOf(item.label)
 
           // もっとも後ろでマッチする町名が正しい町名それ以前は「通り名」
           // See https://github.com/geolonia/community-geocoder/issues/10
-          if (index >= theIndex) {
-            theIndex = index
+          if (0 <= index) {
             const parts = normalized.substring(i).split(item.label)
             result.code = `${item.code}${( Array(3).join('0') + item.chome ).slice( -3 )}`
             result.tail = parts[parts.length - 1]
