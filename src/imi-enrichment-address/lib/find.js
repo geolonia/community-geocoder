@@ -182,8 +182,10 @@ const find = address => {
         }
       }
 
-      // 京都の「通り名」に対する処理
-      if (5 === answer[0].code.length && answer[0].code.startsWith('261') && normalized.substring(i)) {
+      console.log(answer[0].code)
+
+      // コードが261（京都市を指す）で始まる場合は通り名が含まれているものとみなす
+      if (answer[0].code.startsWith('261') && normalized.substring(i)) {
         const result = { code: '', tail: '' }
         const children = answer[0].children
 

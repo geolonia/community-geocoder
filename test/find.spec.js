@@ -53,6 +53,18 @@ describe('Tests for `src/imi-enrichment-address/lib/find.js`.', () => {
     assert.deepEqual('537-1', res.tail)
   });
 
+  it('should find the address "京都府京都市東山区大和大路2-537-1" as expected.', () => {
+    const res = find(util.normalize("京都府京都市東山区大和大路2-537-1"))
+    assert.deepEqual('261050202002', res.code)
+    assert.deepEqual('537-1', res.tail)
+  });
+
+  it('should find the address "京都府京都市東山区大和大路2丁目" as expected.', () => {
+    const res = find(util.normalize("京都府京都市東山区大和大路2丁目"))
+    assert.deepEqual('261050202002', res.code)
+    assert.deepEqual('', res.tail)
+  });
+
   // https://github.com/geolonia/community-geocoder/issues/18
   it('should find the address "埼玉県所沢市上安松" as expected.', () => {
     const res = find(util.normalize("埼玉県所沢市上安松"))
