@@ -246,6 +246,8 @@ const find = address => {
               return false
             }
           }
+
+          return false
         })
         if (typeof hit === 'undefined') {
           hit = latest.children.find(child => {
