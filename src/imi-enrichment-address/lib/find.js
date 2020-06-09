@@ -231,16 +231,20 @@ const find = address => {
       while (latest.next) latest = latest.next
       for (let j = normalized.length; j > number; j--) {
         const body = normalized.substring(number, j)
-        const tail = normalized.substring(j).trim()
+        let tail = normalized.substring(j).trim()
+
+        // See https://github.com/geolonia/community-geocoder/issues/75.
         let hit = latest.children.find(child => {
           let name = child.label
           if (child.chome) {
-            name = `${child.label}${util.h2j(child.chome)}丁目`
-          }
-          if (body.replace(/^大字/, '').replace(/^字/, '') === name.replace(/^大字/, '').replace(/^字/, '')) {
-            return true
-          } else {
-            return false
+            const chome = `${util.h2j(child.chome)}丁目`
+            name = `${child.label}${chome}`
+            if (body.replace(/^大字/, '').replace(/^字/, '') === name.replace(/^大字/, '').replace(/^字/, '')) {
+              tail = normalized.substring(normalized.indexOf(chome)).trim()
+              return true
+            } else {
+              return false
+            }
           }
         })
         if (typeof hit === 'undefined') {
