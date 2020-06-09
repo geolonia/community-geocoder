@@ -183,8 +183,7 @@ const find = address => {
       }
 
       // 京都の「通り名」に対する処理
-      // `丁目` が `tree.json` にある場合バグるかも
-      if (5 === answer[0].code.length && answer[0].code.startsWith('26') && normalized.substring(i)) {
+      if (5 === answer[0].code.length && answer[0].code.startsWith('261') && normalized.substring(i)) {
         const result = { code: '', tail: '' }
         const children = answer[0].children
 
