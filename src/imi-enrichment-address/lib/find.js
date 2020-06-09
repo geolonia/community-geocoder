@@ -182,8 +182,6 @@ const find = address => {
         }
       }
 
-      console.log(answer[0].code)
-
       // コードが261（京都市を指す）で始まる場合は通り名が含まれているものとみなす
       if (answer[0].code.startsWith('261') && normalized.substring(i)) {
         const result = { code: '', tail: '' }
@@ -229,9 +227,27 @@ const find = address => {
       for (let j = normalized.length; j > i; j--) {
         const body = normalized.substring(i, j)
         const tail = normalized.substring(j).trim()
-        const hit = latest.children.find(child => {
-          return body.replace(/^大字/, '').replace(/^字/, '') === child.label.replace(/^大字/, '').replace(/^字/, '')
+        let hit = latest.children.find(child => {
+          let name = child.label
+          if (child.chome) {
+            name = `${child.label}${util.h2j(child.chome)}丁目`
+          }
+          if (body.replace(/^大字/, '').replace(/^字/, '') === name.replace(/^大字/, '').replace(/^字/, '')) {
+            return true
+          } else {
+            return false
+          }
         })
+        if (typeof hit === 'undefined') {
+          hit = latest.children.find(child => {
+            if (body.replace(/^大字/, '').replace(/^字/, '') === child.label.replace(/^大字/, '').replace(/^字/, '')) {
+              return true
+            } else {
+              return false
+            }
+          })
+        }
+
         if (typeof hit !== 'undefined') {
           return fix(hit, tail)
         }
