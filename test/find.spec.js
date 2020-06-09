@@ -201,7 +201,7 @@ describe('Tests for `src/imi-enrichment-address/lib/find.js`.', () => {
   // https://github.com/geolonia/community-geocoder/issues/75
   it('should find the address "京都府宇治市六地藏1丁目" as expected.', () => {
     const res = find(util.normalize("京都府宇治市六地藏1丁目"))
-    assert.deepEqual('262040030000', res.code)
+    assert.deepEqual('262040031001', res.code)
     assert.deepEqual('', res.tail)
   });
 
