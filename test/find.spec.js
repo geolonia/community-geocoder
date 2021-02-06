@@ -292,4 +292,26 @@ describe('Tests for `src/imi-enrichment-address/lib/find.js`.', () => {
     assert.deepEqual('131010049003', res.code)
     assert.deepEqual('', res.tail) // 内部的に `之` を `の` に変換
   })
+
+  // https://github.com/geolonia/community-geocoder/issues/91
+  it('should find the address "高山村高井" as expected.', () => {
+    const res = find(util.normalize("高山村高井"))
+    assert.deepEqual('205430002000', res.code)
+    assert.deepEqual('', res.tail)
+  })
+  it('should find the address "高山村大字高井" as expected.', () => {
+    const res = find(util.normalize("高山村大字高井"))
+    assert.deepEqual('205430002000', res.code)
+    assert.deepEqual('', res.tail)
+  })
+  it('should find the address "森町赤井川" as expected.', () => {
+    const res = find(util.normalize("森町赤井川"))
+    assert.deepEqual('013450001000', res.code)
+    assert.deepEqual('', res.tail)
+  })
+  it('should find the address "森町字赤井川" as expected.', () => {
+    const res = find(util.normalize("森町字赤井川"))
+    assert.deepEqual('013450001000', res.code)
+    assert.deepEqual('', res.tail)
+  })
 })
