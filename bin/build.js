@@ -65,7 +65,7 @@ for (let i = 1; i < 48; i++) {
             fs.writeFileSync(path.join(dir, `${line['大字町丁目コード']}.json`), json)
           }
         })
-      }, 2000)
+      }, 20000)
     })
   })
 }
