@@ -124,6 +124,8 @@ const find = address => {
     normalized = RegExp.$2
   }
 
+  console.log({address})
+
   // 正解と末尾をもとに丁目コードを追加して返す
   const fix = function(hit, tail) {
     if (hit.chome > 0) {
@@ -278,6 +280,11 @@ const find = address => {
       while (latest.next) latest = latest.next
       for (let j = normalized.length; j > number; j--) {
         const body = normalized.substring(number, j)
+
+        // TODO: 最初の数字-にマッチする箇所を。丁目と丁で検索かける。
+        console.log({body})
+        console.log({latest})
+
         let tail = normalized.substring(j).trim()
 
         // See https://github.com/geolonia/community-geocoder/issues/75.
@@ -296,6 +303,7 @@ const find = address => {
 
           return false
         })
+
         if (typeof hit === 'undefined') {
           hit = latest.children.find(child => {
             if (body === dict(child.label)) {
@@ -313,7 +321,6 @@ const find = address => {
             while (t.length < 3) t = '0' + t
             response.code = response.code + t
           }
-
           return response
         }
       }
