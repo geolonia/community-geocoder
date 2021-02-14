@@ -124,8 +124,6 @@ const find = address => {
     normalized = RegExp.$2
   }
 
-  console.log({address})
-
   // 正解と末尾をもとに丁目コードを追加して返す
   const fix = function(hit, tail) {
     if (hit.chome > 0) {
@@ -306,7 +304,21 @@ const find = address => {
 
         if (typeof hit === 'undefined') {
           hit = latest.children.find(child => {
-            if (body === dict(child.label)) {
+            // ノーマライズの部分で「伸ばし棒と全角ハイフン」を半角に置換
+            // TODO: Bodyで最初に出てくる「半角数字 + -」のセット
+            // 最初に出てくる - を丁目に変換
+
+            // TODO: 数字を漢数字に変える必要がある　
+
+            const bodyAddChome = body.replace('-', '丁目')
+            const bodyAddCho = body.replace('-', '丁');
+
+            console.log({body})
+            console.log({bodyAddChome})
+            console.log({bodyAddCho})
+
+
+            if (body === dict(child.label) || bodyAddChome === dict(child.label) || bodyAddCho === dict(child.label)) {
               return true
             } else {
               return false
@@ -314,6 +326,7 @@ const find = address => {
           })
         }
 
+        // ここは結局絶対通る
         if (typeof hit !== 'undefined') {
           const response = fix(hit, tail)
           if (typeof response.expectedChome !== 'undefined') {
