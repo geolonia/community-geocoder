@@ -305,9 +305,9 @@ const find = address => {
             // See https://github.com/geolonia/community-geocoder/issues/87
             if (body.match(/[0-9０-９]+/)) {
               body = body.replace(/[0-9０-９]+/, function(match) {
-                const chomeNumber = parseInt(util.z2h(match), 10);
+                const chomeNumber = parseInt(util.z2h(match), 10)
                 return number2kanji(chomeNumber)
-              });
+              })
             }
 
             const bodyAddChome = body.replace('-', '丁目')

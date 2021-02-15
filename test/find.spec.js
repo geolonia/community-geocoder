@@ -89,14 +89,14 @@ describe('Tests for `src/imi-enrichment-address/lib/find.js`.', () => {
   it('should find the address "長野県松本市岡田松岡１６２－１" as expected.', () => {
     const res = find(util.normalize("長野県松本市岡田松岡１６２－１"))
     assert.deepEqual('202020028000', res.code)
-    assert.deepEqual('１６２－１', res.tail)
+    assert.deepEqual('１６２-１', res.tail)
   });
 
   // https://github.com/geolonia/community-geocoder/issues/15
   it('should find the address "長野県松本市大字岡田松岡１６２－１" as expected.', () => {
     const res = find(util.normalize("長野県松本市大字岡田松岡１６２－１"))
     assert.deepEqual('202020028000', res.code)
-    assert.deepEqual('１６２－１', res.tail)
+    assert.deepEqual('１６２-１', res.tail)
   });
 
   // https://github.com/geolonia/community-geocoder/issues/17
@@ -314,4 +314,29 @@ describe('Tests for `src/imi-enrichment-address/lib/find.js`.', () => {
     assert.deepEqual('013450001000', res.code)
     assert.deepEqual('', res.tail)
   })
+
+  it('should find the address "北海道札幌市白石区南郷通１－北" as expected.', () => {
+    const res = find(util.normalize("北海道札幌市白石区南郷通１－北"))
+    assert.deepEqual('011040071000', res.code)
+    assert.deepEqual('', res.tail)
+  })
+
+  it('should find the address "北海道札幌市白石区南郷通1-北" as expected.', () => {
+    const res = find(util.normalize("北海道札幌市白石区南郷通1-北"))
+    assert.deepEqual('011040071000', res.code)
+    assert.deepEqual('', res.tail)
+  })
+
+  it('should find the address "北海道札幌市白石区南郷通一丁目北" as expected.', () => {
+    const res = find(util.normalize("北海道札幌市白石区南郷通一丁目北"))
+    assert.deepEqual('011040071000', res.code)
+    assert.deepEqual('', res.tail)
+  })
+
+  it('should find the address "大阪府堺市堺区向陵西町2-3-17  " as expected.', () => {
+    const res = find(util.normalize("大阪府堺市堺区向陵西町2-3-17"))
+    assert.deepEqual('271410403000', res.code)
+    assert.deepEqual('3-17', res.tail)
+  })
+
 })
