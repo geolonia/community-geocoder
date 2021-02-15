@@ -248,21 +248,21 @@ const find = address => {
         let match = ''
         for (let k = 0; k < children.length; k++) {
           const item = children[k]
-          const label = dict(item.label)
-          const index = normalized.substring(i).lastIndexOf(label)
+          const normalizedLabel = dict(item.label)
+          const index = normalized.substring(i).lastIndexOf(normalizedLabel)
 
           if (0 <= index) {
-            if (match && 0 <= label.indexOf(match)) { // https://github.com/geolonia/community-geocoder/issues/37
-              const parts = normalized.substring(i).split(label)
+            if (match && 0 <= normalizedLabel.indexOf(match)) { // https://github.com/geolonia/community-geocoder/issues/37
+              const parts = normalized.substring(i).split(normalizedLabel)
               result.code = `${item.code}${( Array(3).join('0') + item.chome ).slice( -3 )}`
-              result.normalized = `京都府京都市${answer[0].label}${label}${parts[parts.length - 1]}`
+              result.normalized = `京都府京都市${answer[0].label}${normalizedLabel}${parts[parts.length - 1]}`
               result.answer = item
             } else {
               if (index > lastIndex) { // See https://github.com/geolonia/community-geocoder/issues/10
                 lastIndex = index
-                const parts = normalized.substring(i).split(label)
+                const parts = normalized.substring(i).split(normalizedLabel)
                 result.code = `${item.code}${( Array(3).join('0') + item.chome ).slice( -3 )}`
-                result.normalized = `京都府京都市${answer[0].label}${label}${parts[parts.length - 1]}`
+                result.normalized = `京都府京都市${answer[0].label}${normalizedLabel}${parts[parts.length - 1]}`
                 result.answer = item
               }
             }
