@@ -45,6 +45,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "@geolonia/japanese-numeral": "^0.1.5",
     "@mapbox/geojson-extent": "^0.3.2",
     "babel-polyfill": "^6.26.0",
     "viewport-units-buggyfill": "^0.6.2"

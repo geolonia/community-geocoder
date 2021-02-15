@@ -198,6 +198,11 @@ const Util = {
       }
     }
 
+    // 半角ハイフンに変換
+    if (name.match(/[－ー–—―]/)) {
+      name = name.replace(/[－ー–—―]/,'-')
+    }
+
     return name
   },
   deepStrictEqual: deepStrictEqual,

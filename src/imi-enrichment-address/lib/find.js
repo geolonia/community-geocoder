@@ -1,5 +1,6 @@
 import util from './util'
 import dict from './dict'
+import { number2kanji } from '@geolonia/japanese-numeral'
 
 // tree の構造変更
 const tree = (function(src) {
@@ -277,12 +278,7 @@ const find = address => {
 
       while (latest.next) latest = latest.next
       for (let j = normalized.length; j > number; j--) {
-        const body = normalized.substring(number, j)
-
-        // TODO: 最初の数字-にマッチする箇所を。丁目と丁で検索かける。
-        console.log({body})
-        console.log({latest})
-
+        let body = normalized.substring(number, j)
         let tail = normalized.substring(j).trim()
 
         // See https://github.com/geolonia/community-geocoder/issues/75.
@@ -304,20 +300,18 @@ const find = address => {
 
         if (typeof hit === 'undefined') {
           hit = latest.children.find(child => {
-            // ノーマライズの部分で「伸ばし棒と全角ハイフン」を半角に置換
-            // TODO: Bodyで最初に出てくる「半角数字 + -」のセット
-            // 最初に出てくる - を丁目に変換
 
-            // TODO: 数字を漢数字に変える必要がある　
+            // 「半角数字  -（ハイフン）」の住所に対応
+            // See https://github.com/geolonia/community-geocoder/issues/87
+            if (body.match(/[0-9０-９]+/)) {
+              body = body.replace(/[0-9０-９]+/, function(match) {
+                const chomeNumber = parseInt(util.z2h(match), 10);
+                return number2kanji(chomeNumber)
+              });
+            }
 
             const bodyAddChome = body.replace('-', '丁目')
-            const bodyAddCho = body.replace('-', '丁');
-
-            console.log({body})
-            console.log({bodyAddChome})
-            console.log({bodyAddCho})
-
-
+            const bodyAddCho = body.replace('-', '丁')
             if (body === dict(child.label) || bodyAddChome === dict(child.label) || bodyAddCho === dict(child.label)) {
               return true
             } else {
@@ -326,7 +320,6 @@ const find = address => {
           })
         }
 
-        // ここは結局絶対通る
         if (typeof hit !== 'undefined') {
           const response = fix(hit, tail)
           if (typeof response.expectedChome !== 'undefined') {
