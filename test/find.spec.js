@@ -314,4 +314,10 @@ describe('Tests for `src/imi-enrichment-address/lib/find.js`.', () => {
     assert.deepEqual('013450001000', res.code)
     assert.deepEqual('', res.tail)
   })
+  // https://github.com/geolonia/community-geocoder/issues/84
+  it('should find the address', () => {
+    const res = find(util.normalize("京都府京都市上京区中長者町通新町西入仲之町276"))
+    assert.deepEqual('261020357000', res.code) // 中長者町通新町西入 を削除
+    assert.deepEqual('276', res.tail)
+  })
 })
