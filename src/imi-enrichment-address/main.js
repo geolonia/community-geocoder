@@ -1,5 +1,7 @@
-import find from './lib/find'
-import util from './lib/util'
+// import find from './lib/find'
+// import util from './lib/util'
+const find = require('./lib/find').find
+const util = require('./lib/util').util
 
 const enrichment = str => {
 
@@ -24,4 +26,5 @@ const enrichment = str => {
   return response.code
 }
 
-export default enrichment
+// export default enrichment
+module.exports.enrichment = enrichment

@@ -1,7 +1,6 @@
-import chai from 'chai';
-const assert = chai.assert;
+const assert = require('chai').assert;
 
-import enrichment from '../src/imi-enrichment-address/main'
+const enrichment = require('../src/imi-enrichment-address/main').enrichment;
 
 describe('Tests for `src/imi-enrichment-address/main.js`.', () => {
   it('should get the code for "大阪府堺市北区新金岡町4丁1−8" as expected.', () => {

@@ -1,5 +1,7 @@
-import util from './util'
-import dict from './dict'
+// import util from './util'
+// import dict from './dict'
+const util = require('./util').util
+const dict = require('./dict').dict
 
 // tree の構造変更
 const tree = (function(src) {
@@ -345,4 +347,4 @@ const find = address => {
   return null
 }
 
-export default find
+module.exports.find = find

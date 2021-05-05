@@ -1,6 +1,7 @@
-import enrichment from './imi-enrichment-address/main'
+const enrichment = require('./imi-enrichment-address/main').enrichment
+const fetch = require('node-fetch')
 
-window.getLatLng = (str, callback, errorCallback = () => {}) => {
+let getLatLng = (str, callback, errorCallback = () => {}) => {
   try {
     let code = enrichment(str)
 
@@ -23,3 +24,5 @@ window.getLatLng = (str, callback, errorCallback = () => {}) => {
     errorCallback(e)
   }
 }
+
+exports.getLatLng = getLatLng

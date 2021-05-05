@@ -52,4 +52,5 @@ const replace = str => {
   return str
 }
 
-export default replace
+// export default replace
+module.exports.dict = replace
