@@ -1,16 +1,30 @@
 {
-  "name": "simple-geocoding",
+  "name": "nuxt-simple-geocoding-ja",
   "version": "1.0.0",
-  "description": "",
-  "main": "./bin/build.js",
+  "description": "Simple geocoding for japanese address based on community geocoder",
+  "main": "index.js",
   "scripts": {
     "test": "npm run test:lint && npm run test:mocha ./test/**/*.spec.js",
     "test:lint": "eslint \"src/**/*.js\" --fix",
     "test:mocha": "mocha --require @babel/register",
     "test:addresses": "npm run test:mocha ./test/addresses.js"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r-soga/nuxt-simple-geocoding-ja.git"
+  },
+  "keywords": [
+    "geocoder",
+    "geocoding",
+    "nuxt",
+    "japanese"
+  ],
+  "author": "Ryo Soga <pub.ryo.soga@gmail.com> (https://github.com/r-soga)",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/r-soga/nuxt-simple-geocoding-ja"
+  },
+  "homepage": "https://github.com/r-soga/nuxt-simple-geocoding-ja#readme",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.10.2",
