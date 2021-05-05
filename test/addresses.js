@@ -1,10 +1,9 @@
-import chai from 'chai';
-const assert = chai.assert;
-import fs from 'fs'
-import path from 'path'
+const assert = require('chai').assert;
+const fs = require('fs');
+const path = require('path');
 
-import util from '../src/imi-enrichment-address/lib/util'
-import find from '../src/imi-enrichment-address/lib/find'
+const util = require('../src/imi-enrichment-address/lib/util').util;
+const find = require('../src/imi-enrichment-address/lib/find').find;
 
 it.allowFail = (title, callback) => {
   it(title, function() {

@@ -1,4 +1,5 @@
-import dict from './dict'
+// import dict from './dict'
+const dict = require('./dict').dict
 
 const replacer = function(keyval) {
   const reg = new RegExp('[' + Object.keys(keyval).join('') + ']', 'g')
@@ -214,4 +215,5 @@ const Util = {
   },
 }
 
-export default Util
+// export default Util
+module.exports.util = Util

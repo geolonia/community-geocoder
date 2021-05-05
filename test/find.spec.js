@@ -1,8 +1,7 @@
-import chai from 'chai';
-const assert = chai.assert;
+const assert = require('chai').assert;
 
-import util from '../src/imi-enrichment-address/lib/util'
-import find from '../src/imi-enrichment-address/lib/find'
+const util = require('../src/imi-enrichment-address/lib/util').util;
+const find = require('../src/imi-enrichment-address/lib/find').find;
 
 describe('Tests for `src/imi-enrichment-address/lib/find.js`.', () => {
   it('should find the address "大阪府大阪市中央区大手前２丁目１" as expected.', () => {

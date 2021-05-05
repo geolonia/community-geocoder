@@ -1,7 +1,6 @@
-import chai from 'chai';
-const assert = chai.assert;
+const assert = require('chai').assert;
 
-import util from '../src/imi-enrichment-address/lib/util'
+const util = require('../src/imi-enrichment-address/lib/util').util;
 
 describe('Tests for `src/imi-enrichment-address/lib/util.js`.', () => {
   it('should normalize address "大阪府堺市北区新金岡町4丁1−8".', () => {
