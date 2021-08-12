@@ -31,7 +31,6 @@
     "csv-parse": "^4.10.1",
     "encoding-japanese": "^1.0.30",
     "eslint": "^5.3.0",
-    "imi-enrichment-address": "git+https://github.com/IMI-Tool-Project/imi-enrichment-address.git",
     "mocha": "^8.3.2",
     "node-sass": "^4.13.1",
     "prettier-eslint": "^9.0.1",
@@ -45,6 +44,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "@geolonia/normalize-japanese-addresses": "^2.1.0",
     "@mapbox/geojson-extent": "^1.0.0",
     "babel-polyfill": "^6.26.0",
     "viewport-units-buggyfill": "^0.6.2"
