@@ -45,33 +45,40 @@ document.addEventListener('DOMContentLoaded', () => {
       window.getLatLng(document.getElementById('address').value, latlng => {
         // eslint-disable-next-line no-console
         console.log(latlng)
-        // TODO: latlng.levelが3でない場合には、県名+市区町村を市区町村コードに変換し、
-        // 以下の処理に渡して対応するlatlngを取得する必要がある。
-        //
-        // if (5 === latlng.code.length) {
-        //   const endpoint = `https://geolonia.github.io/japanese-admins/${latlng.code.substr(0, 2)}/${latlng.code}.json`
-        //   fetch(endpoint).then(res => {
-        //     return res.json()
-        //   }).then(data => {
-        //     map.fitBounds(geojsonExtent(data))
-        //     map.addLayer({
-        //       id: 'japanese-administration',
-        //       type: 'fill',
-        //       source: {
-        //         type: 'geojson',
-        //         data: data,
-        //       },
-        //       layout: {},
-        //       paint: {
-        //         'fill-color': '#ff0000',
-        //         'fill-opacity': 0.08,
-        //       },
-        //     })
-        //     showMessage(`住所の判定ができなかったので「${data.features[0].properties.name}」に移動します。`)
-        //   })
-        // } else {
+        if (latlng.level === 2) {
+          const endpoint = 'https://geolonia.github.io/jisx0402/api/v1/all.json'
+          fetch(endpoint).then(res => {
+            return res.json()
+          }).then(data => {
+            const keys = Object.keys(data)
+            const values = Object.values(data)
+            const index = values.findIndex(value => value.prefecture === latlng.pref && value.city === latlng.city)
+            const code = keys[index].substr(0, 5)
+
+            const endpoint = `https://geolonia.github.io/japanese-admins/${code.substr(0, 2)}/${code}.json`
+            fetch(endpoint).then(res => {
+              return res.json()
+            }).then(data => {
+              map.fitBounds(geojsonExtent(data))
+              map.addLayer({
+                id: 'japanese-administration',
+                type: 'fill',
+                source: {
+                  type: 'geojson',
+                  data: data,
+                },
+                layout: {},
+                paint: {
+                  'fill-color': '#ff0000',
+                  'fill-opacity': 0.08,
+                },
+              })
+              showMessage(`住所の判定ができなかったので「${data.features[0].properties.name}」に移動します。`)
+            })
+          })
+        } else {
           map.flyTo({ center: latlng, zoom: 16, essential: true })
-        // }
+        }
       }, e => {
         document.querySelector('#err .msg').textContent = e.message
         showMessage(e)
