@@ -1,5 +1,7 @@
 import geojsonExtent from '@mapbox/geojson-extent'
 
+import { getLatLng } from './api.js'
+
 require('viewport-units-buggyfill').init()
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -42,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('err').style.visibility = 'hidden'
 
     if (document.getElementById('address').value) {
-      window.getLatLng(document.getElementById('address').value, latlng => {
+      getLatLng(document.getElementById('address').value, latlng => {
         // eslint-disable-next-line no-console
         console.log(latlng)
         if (latlng.level === 1) {

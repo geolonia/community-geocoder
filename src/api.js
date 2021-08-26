@@ -1,6 +1,6 @@
 const { normalize } = require('@geolonia/normalize-japanese-addresses')
 
-window.getLatLng = (str, callback, errorCallback = () => {}) => {
+export const getLatLng = (str, callback, errorCallback = () => {}) => {
   try {
     normalize(str).then(json => {
       if (json.level > 0) {
