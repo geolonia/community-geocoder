@@ -45,7 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
       window.getLatLng(document.getElementById('address').value, latlng => {
         // eslint-disable-next-line no-console
         console.log(latlng)
-        if (latlng.level === 2) {
+        if (latlng.level === 1) {
+          const endpoint = 'https://geolonia.github.io/japanese-prefectural-capitals/index.json'
+          fetch(endpoint).then(res => {
+            return res.json()
+          }).then(data => {
+            map.flyTo({ center: data[latlng.pref], zoom: 9, essential: true })
+            showMessage(`住所の判定ができなかったので「${latlng.pref}」に移動します。`)
+          })
+        } else if (latlng.level === 2) {
           const endpoint = 'https://geolonia.github.io/jisx0402/api/v1/all.json'
           fetch(endpoint).then(res => {
             return res.json()
