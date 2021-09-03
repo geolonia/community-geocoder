@@ -2,18 +2,13 @@
   "name": "simple-geocoding",
   "version": "1.0.0",
   "description": "",
-  "main": "./bin/build.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --config ./docs/webpack.config.js",
     "build": "webpack -p --config ./webpack.config.js",
-    "build:api": "npm run build:clean && node ./bin/build.js",
-    "build:clean": "rm -fr ./data && mkdir ./data && rm -fr ./docs/api && mkdir ./docs/api",
     "test": "npm run test:lint && npm run test:mocha ./test/**/*.spec.js",
     "test:lint": "eslint \"src/**/*.js\" --fix",
     "test:mocha": "mocha --require @babel/register",
-    "test:addresses": "npm run test:mocha ./test/addresses.js",
-    "download": "bash bin/download.sh",
-    "tree": "gzcat cache/isj.txt.gz  | node bin/tree.js cache/sac_label.json cache/sac_parent.json cache/sac_change.json > src/imi-enrichment-address/lib/tree.json"
+    "test:addresses": "npm run test:mocha ./test/addresses.js"
   },
   "author": "",
   "license": "MIT",
@@ -31,7 +26,6 @@
     "csv-parse": "^4.10.1",
     "encoding-japanese": "^1.0.30",
     "eslint": "^5.3.0",
-    "imi-enrichment-address": "git+https://github.com/IMI-Tool-Project/imi-enrichment-address.git",
     "mocha": "^8.3.2",
     "node-sass": "^4.13.1",
     "prettier-eslint": "^9.0.1",
@@ -45,6 +39,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "@geolonia/normalize-japanese-addresses": "^2.1.0",
     "@mapbox/geojson-extent": "^1.0.0",
     "babel-polyfill": "^6.26.0",
     "viewport-units-buggyfill": "^0.6.2"
