@@ -17,3 +17,7 @@ export const getLatLng = (str, callback, errorCallback = () => {}) => {
     errorCallback(e)
   }
 }
+
+if (typeof window !== 'undefined') {
+  window.getLatLng = getLatLng
+}
