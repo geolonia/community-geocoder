@@ -48,6 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // eslint-disable-next-line no-console
         console.log(latlng)
         if (latlng.level === 1) {
+          // 都道府県名までしか判別できなかった場合(正規化レベル1)は、
+          // @geolonia/japanese-prefectural-capitals(https://github.com/geolonia/japanese-prefectural-capitals)
+          // を使って県庁所在地の緯度・経度を取得しています。
           const endpoint = 'https://geolonia.github.io/japanese-prefectural-capitals/index.json'
           fetch(endpoint).then(res => {
             return res.json()
@@ -56,6 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
             showMessage(`住所の判定ができなかったので「${latlng.pref}」に移動します。`)
           })
         } else if (latlng.level === 2) {
+          // 市区町村名までしか判別できなかった場合(正規化レベル2)は、
+          // @geolonia/jisx0402(https://github.com/geolonia/jisx0402)
+          // を使って市区町村名から市区町村コードを取得し、
+          // @geolonia/japanese-admins(https://github.com/geolonia/japanese-admins)
+          // を使って市区町村コードから緯度・経度を取得しています。
           const endpoint = 'https://geolonia.github.io/jisx0402/api/v1/all.json'
           fetch(endpoint).then(res => {
             return res.json()
