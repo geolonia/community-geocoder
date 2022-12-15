@@ -10,11 +10,15 @@ module.exports = {
 
   devServer: {
     open: true,
-    openPage: 'index.html',
-    contentBase: __dirname,
-    watchContentBase: true,
+    liveReload: true,
+    static: {
+      directory: __dirname,
+      watch: {
+        poll: 500
+      }
+    },
     host: 'localhost',
     port: 3000,
-    disableHostCheck: true
+    allowedHosts: 'all'
   },
 }
