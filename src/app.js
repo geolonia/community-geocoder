@@ -70,7 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
           }).then(data => {
             const keys = Object.keys(data)
             const values = Object.values(data)
-            const index = values.findIndex(value => value.prefecture === latlng.pref && value.city === latlng.city)
+            const index = values.findIndex(value =>
+              value.prefecture === latlng.pref && (
+                value.city === latlng.city ||
+                latlng.city.endsWith(`郡${value.city}`) // 郡名が含まれていないため
+              )
+            )
             const code = keys[index].substr(0, 5)
 
             const endpoint = `https://geolonia.github.io/japanese-admins/${code.substr(0, 2)}/${code}.json`
