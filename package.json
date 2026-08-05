@@ -6,7 +6,8 @@
     "start": "webpack-dev-server --mode development --config ./docs/webpack.config.js",
     "build": "webpack --mode=production --config ./webpack.config.js",
     "test": "npm run test:lint && npm run test:mocha ./test/**/*.spec.js",
-    "test:lint": "eslint \"src/**/*.js\" --fix",
+    "test:lint": "eslint \"src/**/*.js\"",
+    "lint:fix": "eslint \"src/**/*.js\" --fix",
     "test:mocha": "mocha --require @babel/register",
     "test:addresses": "npm run test:mocha ./test/addresses.js"
   },

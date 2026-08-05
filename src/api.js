@@ -1,4 +1,4 @@
-const { normalize } = require('@geolonia/normalize-japanese-addresses')
+import { normalize } from '@geolonia/normalize-japanese-addresses'
 
 export const getLatLng = (str, callback, errorCallback = () => {}) => {
   try {
