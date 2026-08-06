@@ -29,6 +29,10 @@ module.exports = {
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
+        // package.json の "type": "commonjs" により、webpack は .js を
+        // javascript/dynamic として扱い ESM 構文を解析できなくなる。
+        // babel-loader に渡す前の判定を auto に戻す。
+        type: 'javascript/auto',
         use: {
           loader: 'babel-loader',
         },

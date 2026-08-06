@@ -2,6 +2,10 @@
   "name": "simple-geocoding",
   "version": "1.0.0",
   "description": "",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "webpack-dev-server --mode development --config ./docs/webpack.config.js",
     "build": "webpack --mode=production --config ./webpack.config.js",
