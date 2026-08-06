@@ -1,8 +1,9 @@
 import geojsonExtent from '@mapbox/geojson-extent'
+import viewportUnitsBuggyfill from 'viewport-units-buggyfill'
 
 import { getLatLng } from './api.js'
 
-require('viewport-units-buggyfill').init()
+viewportUnitsBuggyfill.init()
 
 document.addEventListener('DOMContentLoaded', () => {
   const map = new window.geolonia.Map('#map')
@@ -74,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
               value.prefecture === latlng.pref && (
                 value.city === latlng.city ||
                 latlng.city.endsWith(`郡${value.city}`) // 郡名が含まれていないため
-              )
+              ),
             )
             const code = keys[index].substr(0, 5)
 
